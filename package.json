@@ -1,6 +1,6 @@
 {
   "name": "oxyon-verify-mcp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Oxyon Verify: a verify-only MCP server. Checks GeoProof evidence (XYO bound witnesses and receipts) offline. No keys, no signing, no network.",
   "type": "module",
   "private": true,

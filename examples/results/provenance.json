@@ -1,0 +1,22 @@
+{
+  "tool": "oxyon_provenance",
+  "result": {
+    "hash": "f7ddc16c9f639b281ca5dd10ab1f7e59fc4840f7190c35e58a6a9f90e2bd8a1b",
+    "signers": [
+      "107f3903a4312bbc82a74e6645a9e7d077f2e3ef"
+    ],
+    "previousHashes": [
+      null
+    ],
+    "payloads": [
+      {
+        "hash": "0aa6e565fee0fe47f3796942019ad71542b49469308c2d2fbab0cce751a466b9",
+        "schema": "network.xyo.example.statement",
+        "supplied": true
+      }
+    ],
+    "unlisted": [],
+    "signaturesChecked": false,
+    "note": "Provenance is read from the bound witness as given; run oxyon_verify to check its signatures. Supplied payloads are matched by recomputed hash."
+  }
+}

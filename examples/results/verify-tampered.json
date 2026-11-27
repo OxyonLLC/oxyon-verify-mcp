@@ -1,0 +1,14 @@
+{
+  "tool": "oxyon_verify",
+  "result": {
+    "result": "FAILED",
+    "problems": [
+      "Invalid signature [107f3903a4312bbc82a74e6645a9e7d077f2e3ef]"
+    ],
+    "hash": "fd69acf184aa5c3dc852585ee949c04fca24aef29933fc6ce63fb378ccb51e82",
+    "signers": [
+      "107f3903a4312bbc82a74e6645a9e7d077f2e3ef"
+    ],
+    "scope": "Checks the signatures, hashes and structure of the JSON given, offline. It does not establish that any signed statement is true, who controls a signing address, or that anything was anchored on a live network."
+  }
+}

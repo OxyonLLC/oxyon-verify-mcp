@@ -1,0 +1,17 @@
+{
+  "tool": "oxyon_replay",
+  "result": {
+    "result": "VERIFIED",
+    "receiptVerdict": "verified",
+    "checks": {
+      "proofSignaturesValid": true,
+      "receiptSignaturesValid": true,
+      "receiptLinksToProof": true,
+      "receiptIsSignedPayload": true,
+      "batchListsProofAndReceipt": true
+    },
+    "problems": [],
+    "anchor": "NOT_EVALUATED: batch membership was checked; whether the batch is on a live network was not",
+    "scope": "Checks the signatures, hashes and structure of the JSON given, offline. It does not establish that any signed statement is true, who controls a signing address, or that anything was anchored on a live network."
+  }
+}
