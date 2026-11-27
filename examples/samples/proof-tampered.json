@@ -1,0 +1,18 @@
+{
+  "addresses": [
+    "107f3903a4312bbc82a74e6645a9e7d077f2e3ef"
+  ],
+  "payload_hashes": [
+    "0000000000000000000000000000000000000000000000000000000000000000"
+  ],
+  "payload_schemas": [
+    "network.xyo.example.statement"
+  ],
+  "previous_hashes": [
+    null
+  ],
+  "schema": "network.xyo.boundwitness",
+  "$signatures": [
+    "9d413d30d4c6c49e10373be6cc6aa27ca0b7ff0cf690a0bd1e42df29c665784b40e6bf8258659f306fa737483b814f5f1c77cfdb10ed7366dd6e87e6f356fc55"
+  ]
+}

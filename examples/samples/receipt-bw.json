@@ -1,0 +1,18 @@
+{
+  "addresses": [
+    "bde1290dca5cad2eba9f22318d6657e34f656e68"
+  ],
+  "payload_hashes": [
+    "8580e7e7001a140713ba758559f1515b78a1daa474877e7138ef377941eaa5c5"
+  ],
+  "payload_schemas": [
+    "network.xyo.example.receipt"
+  ],
+  "previous_hashes": [
+    null
+  ],
+  "schema": "network.xyo.boundwitness",
+  "$signatures": [
+    "7dbeae9a56a681a9e70dda55626101d30b69718861454954ccf1dad95491876b279977e1ec65b48deee6dd4905ed40840073d0790868d4194334a95daa4e60a7"
+  ]
+}

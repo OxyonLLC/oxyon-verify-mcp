@@ -6,14 +6,17 @@
 //   - it makes no network requests: every check runs on the JSON you pass in.
 // tests/boundary.test.mjs enforces all three against this source.
 //
-// Results use Oxyon's vocabulary: VERIFIED, FAILED, INCONCLUSIVE, NOT_EVALUATED, UNSUPPORTED. A result is about the
+// Results use Oxyon's vocabulary: VERIFIED, FAILED, UNSUPPORTED for a result, NOT_EVALUATED for a check that is out of
+// scope offline (on-chain anchoring). INCONCLUSIVE is never produced here: an offline tool has no source that can be
+// unavailable. A result is about the
 // signatures and hash links of the exact JSON given; it never establishes that a signed statement is true.
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { z } from 'zod'
 import { BoundWitnessValidator } from '@xyo-network/boundwitness-validator'
 import { PayloadBuilder } from '@xyo-network/payload-builder'
 
-export const VERSION = '1.0.0'
+export const VERSION = '1.1.0'
+export const RESULTS = Object.freeze(['VERIFIED', 'FAILED', 'UNSUPPORTED'])
 export const LIMITS = Object.freeze({ maxInputBytes: 256 * 1024, maxDepth: 32, maxPayloads: 64, timeoutMs: 10_000 })
 export const TOOLS = Object.freeze(['oxyon_capabilities', 'oxyon_docs', 'oxyon_verify', 'oxyon_replay', 'oxyon_provenance'])
 export const NOT_PROVIDED = Object.freeze(['attestation signing', 'issuing receipts', 'anchoring', 'revocation', 'superseding records',
@@ -105,7 +108,7 @@ export async function provenance({ boundWitness, payloads = [] }) {
 
 const DOCS = {
   overview: 'Oxyon Verify checks GeoProof evidence (XYO bound witnesses and GeoProof receipts) offline. It holds no key and cannot sign, anchor, revoke or change anything. Oxyon is independent; it is not XYO Network or XY Labs. https://oxyon.io/proof/center/',
-  results: 'VERIFIED: every check in scope passed. FAILED: at least one check disagreed. INCONCLUSIVE: nothing failed but something could not be checked. NOT_EVALUATED: not checked. UNSUPPORTED: not a format this tool reads. PENDING (on oxyon.io records) means waiting for chain finality and is not a verdict.',
+  results: 'This server returns VERIFIED (every check in scope passed), FAILED (at least one check disagreed) or UNSUPPORTED (not a format it reads). NOT_EVALUATED marks a check it cannot do offline, such as whether a batch is on a live chain. It never returns INCONCLUSIVE: working offline, it has no source that can be unavailable. The Oxyon Proof Center, which reads the chain, can return INCONCLUSIVE and PENDING (waiting for finality, not a verdict).',
   boundaries: `Provided: ${TOOLS.join(', ')}. Not provided: ${NOT_PROVIDED.join(', ')}. Limits: ${LIMITS.maxInputBytes} bytes per call, ${LIMITS.maxDepth} levels of nesting, ${LIMITS.timeoutMs} ms per check.`,
   verify: 'oxyon_verify(boundWitness): validates signatures, payload hashes and structure of one bound witness. VERIFIED says the JSON is intact and signed by the listed addresses; it does not say the statement is true.',
   replay: 'oxyon_replay(proofBoundWitness, receipt, receiptBoundWitness, anchorBatch?): stranger-mode re-check of a receipt: both signatures, that the receipt names this exact proof, that the receipt payload is the one signed, and optional batch membership. On-chain anchoring is NOT_EVALUATED here.',
@@ -123,7 +126,9 @@ export function createVerifyServer() {
     description: 'What this verify-only server can and cannot do, its limits and its result states. Call this first.',
     inputSchema: {},
   }, guarded(async () => ({ server: 'oxyon-verify', version: VERSION, tools: TOOLS, notProvided: NOT_PROVIDED, limits: LIMITS,
-    results: ['VERIFIED', 'FAILED', 'INCONCLUSIVE', 'NOT_EVALUATED', 'UNSUPPORTED'], network: 'none', keys: 'none', docs: DOC_TOPICS })))
+    results: RESULTS, checkStates: ['NOT_EVALUATED'], network: 'none', keys: 'none', docs: DOC_TOPICS,
+    establishes: 'Signatures, hashes and links within the JSON you supply.',
+    doesNotEstablish: 'Current blockchain state, that anything is on a live chain, that a statement is true, or who controls a signing address.' })))
 
   server.registerTool('oxyon_docs', {
     description: 'Short documentation for one topic: ' + DOC_TOPICS.join(', ') + '.',

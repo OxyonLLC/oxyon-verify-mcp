@@ -1,0 +1,18 @@
+{
+  "tool": "oxyon_replay",
+  "result": {
+    "result": "FAILED",
+    "receiptVerdict": "rejected",
+    "checks": {
+      "proofSignaturesValid": true,
+      "receiptSignaturesValid": true,
+      "receiptLinksToProof": true,
+      "receiptIsSignedPayload": false
+    },
+    "problems": [
+      "the receipt payload is not one the receipt bound witness signed"
+    ],
+    "anchor": "NOT_EVALUATED",
+    "scope": "Checks the signatures, hashes and structure of the JSON given, offline. It does not establish that any signed statement is true, who controls a signing address, or that anything was anchored on a live network."
+  }
+}

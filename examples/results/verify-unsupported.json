@@ -1,0 +1,8 @@
+{
+  "tool": "oxyon_verify",
+  "result": {
+    "result": "UNSUPPORTED",
+    "reason": "not a bound witness (schema must be \"network.xyo.boundwitness\")",
+    "scope": "Checks the signatures, hashes and structure of the JSON given, offline. It does not establish that any signed statement is true, who controls a signing address, or that anything was anchored on a live network."
+  }
+}
