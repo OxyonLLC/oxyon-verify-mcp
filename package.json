@@ -1,0 +1,36 @@
+{
+  "name": "oxyon-verify-mcp",
+  "version": "1.0.0",
+  "description": "Oxyon Verify: a verify-only MCP server. Checks GeoProof evidence (XYO bound witnesses and receipts) offline. No keys, no signing, no network.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "oxyon-verify-mcp": "src/stdio.mjs"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "node src/stdio.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "@xyo-network/boundwitness-validator": "7.0.15",
+    "@xyo-network/payload-builder": "7.0.15",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@xyo-network/account": "7.0.15",
+    "@xyo-network/boundwitness-builder": "7.0.15"
+  },
+  "overrides": {
+    "uuid": "11.1.1"
+  }
+}
